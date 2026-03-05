@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Predict your diabetes risk using machine learning. Enter health metrics and get instant probability results.">
+    <title>Diabetes Prediction System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <!-- ============ HEADER ============ -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="logo">
+                <span class="logo-icon">🩺</span>
+                <span class="logo-text">DiabetesPredict</span>
+            </div>
+            <nav>
+                <a href="/performance" class="nav-link">📊 Model Performance</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+        <h1>Diabetes Risk Predictor</h1>
+        <p class="hero-sub">Enter your health metrics below and our ML model will estimate your diabetes risk.</p>
+    </section>
+
+    <!-- ============ MAIN CARD ============ -->
+    <main class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Health Metrics</h2>
+                <p>Fill in all fields to get your prediction</p>
+            </div>
+
+            <form id="predict-form" action="/predict" method="post">
+                <div class="form-grid">
+
+                    <!-- Pregnancies -->
+                    <div class="form-group">
+                        <label for="pregnancies">Pregnancies</label>
+                        <input type="number" id="pregnancies" name="Pregnancies" step="any" placeholder="e.g. 2" required>
+                    </div>
+
+                    <!-- Glucose -->
+                    <div class="form-group">
+                        <label for="glucose">Glucose (mg/dL)</label>
+                        <input type="number" id="glucose" name="Glucose" step="any" placeholder="e.g. 120" required>
+                    </div>
+
+                    <!-- Blood Pressure -->
+                    <div class="form-group">
+                        <label for="bp">Blood Pressure (mm Hg)</label>
+                        <input type="number" id="bp" name="BloodPressure" step="any" placeholder="e.g. 70" required>
+                    </div>
+
+                    <!-- Skin Thickness -->
+                    <div class="form-group">
+                        <label for="skin">Skin Thickness (mm)</label>
+                        <input type="number" id="skin" name="SkinThickness" step="any" placeholder="e.g. 20" required>
+                    </div>
+
+                    <!-- Insulin -->
+                    <div class="form-group">
+                        <label for="insulin">Insulin (μU/mL)</label>
+                        <input type="number" id="insulin" name="Insulin" step="any" placeholder="e.g. 80" required>
+                    </div>
+
+                    <!-- BMI — with hover calculator -->
+                    <div class="form-group bmi-form-group">
+                        <label for="bmi" class="has-tooltip">
+                            BMI (kg/m²)
+                            <span class="tooltip-icon">🔢</span>
+                        </label>
+                        <div class="bmi-input-wrapper">
+                            <input type="number" id="bmi" name="BMI" step="0.1" placeholder="e.g. 25.5" required>
+                            <div class="bmi-container">
+                                <button type="button" class="bmi-btn">📐</button>
+                                <div class="bmi-popup">
+                                    <h4>BMI Calculator</h4>
+                                    <div class="bmi-result">--</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Diabetes Pedigree Function — with hover definition -->
+                    <div class="form-group tooltip-wrapper" id="dpf-group">
+                        <label for="dpf" class="has-tooltip">
+                            Diabetes Pedigree Function
+                            <span class="tooltip-icon">ℹ️</span>
+                        </label>
+                        <input type="number" id="dpf" name="DiabetesPedigreeFunction" step="any" placeholder="e.g. 0.47" required>
+
+                        <!-- DPF Definition Tooltip -->
+                        <div class="dpf-tooltip" id="dpf-tooltip">
+                            <h4>What is Diabetes Pedigree Function?</h4>
+                            <p>
+                                The Diabetes Pedigree Function (DPF) is a score that indicates 
+                                the <strong>genetic influence</strong> of diabetes based on family history. 
+                                It uses information about relatives with diabetes and their 
+                                genetic relationship to the patient to provide a synthesis of 
+                                the diabetes mellitus history in relatives and the genetic 
+                                relationship of those relatives to the subject.
+                            </p>
+                            <p>
+                                <strong>Range:</strong> Typically 0.08 – 2.42<br>
+                                <strong>Higher values</strong> indicate a stronger genetic predisposition to diabetes.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Age -->
+                    <div class="form-group">
+                        <label for="age">Age (years)</label>
+                        <input type="number" id="age" name="Age" step="any" placeholder="e.g. 35" required>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="submit-btn" id="submit-btn">
+                    <span class="btn-text">🔬 Predict Risk</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- ============ RESULTS CARD ============ -->
+        {% if prediction_text %}
+        <div class="card results-card {% if 'High' in prediction_text %}high-risk{% else %}low-risk{% endif %}" id="results">
+            <div class="result-header">
+                <h2 class="result-title">{{ prediction_text }}</h2>
+            </div>
+
+            <div class="prob-section">
+                <div class="prob-row">
+                    <div class="prob-label">
+                        <span class="prob-dot diabetic-dot"></span>
+                        Diabetes Probability
+                    </div>
+                    <span class="prob-value diabetic-value">{{ diabetic_probability }}%</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill diabetic-fill" id="diabetic-bar" data-width="{{ diabetic_bar }}"></div>
+                </div>
+
+                <div class="prob-row" style="margin-top: 1.2rem;">
+                    <div class="prob-label">
+                        <span class="prob-dot non-diabetic-dot"></span>
+                        Non-Diabetes Probability
+                    </div>
+                    <span class="prob-value non-diabetic-value">{{ non_diabetic_probability }}%</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill non-diabetic-fill" id="non-diabetic-bar" data-width="{{ non_diabetic_bar }}"></div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="footer">
+        <p>Diabetes risk Predictor | For educational purposes only</p>
+        <p>All rights reserved | Aatreyee Nag &copy; 2026</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>

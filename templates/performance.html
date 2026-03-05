@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Model Performance</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='performance.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="site-header">
+    <div class="container">
+        <h1>Model Performance Report</h1>
+        <p class="tagline">Analysis and comparison of trained prediction models</p>
+    </div>
+</header>
+
+<main class="container perf-main">
+
+    <section class="card perf-card">
+        <h2>Model Accuracy Metrics</h2>
+        
+        <div class="table-wrapper">
+            <table class="perf-table">
+                <thead>
+                    <tr>
+                        <th>Model Name</th>
+                        <th>Accuracy</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for model, info in results.items() %}
+                    <tr class="perf-row" data-accuracy="{{ info.accuracy }}">
+                        <td class="model-name">{{ model }}</td>
+                        <td class="accuracy-value">{{ "%.2f"|format(info.accuracy * 100) }}%</td>
+                        <td>
+                            <span class="badge" data-accuracy="{{ info.accuracy }}">
+                                {% if info.accuracy >= 0.85 %}
+                                    ✓ Excellent
+                                {% elif info.accuracy >= 0.75 %}
+                                    ⟳ Good
+                                {% elif info.accuracy >= 0.65 %}
+                                    ⚠ Fair
+                                {% else %}
+                                    ✗ Poor
+                                {% endif %}
+                            </span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="insights">
+            <h3>Key Insights</h3>
+            <ul class="insight-list">
+                <li>All trained models are evaluated on the same test dataset</li>
+                <li>Higher accuracy indicates better diabetes prediction capability</li>
+                <li>Consider ensemble methods to improve overall performance</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="card perf-card stats-card">
+        <h2>Performance Summary</h2>
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-value" id="avg-accuracy">--</div>
+                <div class="stat-label">Average Accuracy</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="best-accuracy">--</div>
+                <div class="stat-label">Best Model</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="total-models">{{ results|length }}</div>
+                <div class="stat-label">Total Models</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="nav-actions">
+        <a href="/" class="btn-link">← Back to Prediction</a>
+    </div>
+
+</main>
+
+<footer class="site-footer">
+    <div class="container">&copy; 2026 Diabetes Predictor | Model Performance Metrics</div>
+</footer>
+
+<script src="{{ url_for('static', filename='performance.js') }}"></script>
+</body>
+</html>

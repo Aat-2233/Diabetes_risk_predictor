@@ -1,0 +1,840 @@
+/* ===================================================
+   Diabetes Prediction App — Light Theme Stylesheet
+   =================================================== */
+
+/* ---------- CSS Variables ---------- */
+:root {
+    --bg-gradient-start: #e8f0fe;
+    --bg-gradient-end: #f5f0ff;
+    --card-bg: rgba(255, 255, 255, 0.72);
+    --card-border: rgba(255, 255, 255, 0.6);
+    --card-shadow: 0 8px 32px rgba(100, 100, 140, 0.12);
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --accent: #6366f1;
+    --accent-hover: #4f46e5;
+    --accent-glow: rgba(99, 102, 241, 0.25);
+    --input-bg: #f8fafc;
+    --input-border: #e2e8f0;
+    --input-focus-border: #6366f1;
+    --danger: #ef4444;
+    --danger-light: #fef2f2;
+    --success: #10b981;
+    --success-light: #ecfdf5;
+    --bar-diabetic: linear-gradient(90deg, #f97316, #ef4444);
+    --bar-non-diabetic: linear-gradient(90deg, #34d399, #10b981);
+    --popup-bg: #ffffff;
+    --popup-shadow: 0 12px 40px rgba(60, 60, 100, 0.18);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---------- Reset & Base ---------- */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: var(--text-primary);
+    background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+    min-height: 100vh;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Header ---------- */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.7);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 1px 8px rgba(100, 100, 140, 0.06);
+}
+
+.header-inner {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0.85rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo-icon {
+    font-size: 1.5rem;
+}
+
+.logo-text {
+    font-weight: 700;
+    font-size: 1.15rem;
+    background: linear-gradient(135deg, var(--accent), #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.45rem 1rem;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.nav-link:hover {
+    color: var(--accent);
+    background: var(--accent-glow);
+}
+
+/* ---------- Hero Section ---------- */
+.hero {
+    text-align: center;
+    padding: 2.5rem 1.5rem 1rem;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, var(--accent), #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+}
+
+.hero-sub {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* ---------- Container ---------- */
+.container {
+    max-width: 720px;
+    margin: 1.5rem auto 3rem;
+    padding: 0 1.25rem;
+}
+
+/* ---------- Glassmorphism Card ---------- */
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius);
+    box-shadow: var(--card-shadow);
+    padding: 2rem 2.2rem;
+    margin-bottom: 1.5rem;
+    transition: box-shadow var(--transition);
+}
+
+.card:hover {
+    box-shadow: 0 12px 40px rgba(100, 100, 140, 0.16);
+}
+
+.card-header {
+    margin-bottom: 1.5rem;
+}
+
+.card-header h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.card-header p {
+    color: var(--text-secondary);
+    font-size: 0.88rem;
+    margin-top: 0.25rem;
+}
+
+/* ---------- Form Grid ---------- */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: color var(--transition);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--text-primary);
+    background: var(--input-bg);
+    border: 1.5px solid var(--input-border);
+    border-radius: var(--radius-sm);
+    outline: none;
+    transition: var(--transition);
+}
+
+.form-group input::placeholder {
+    color: var(--text-muted);
+}
+
+.form-group input:focus {
+    border-color: var(--input-focus-border);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+    background: #fff;
+}
+
+.form-group input:hover {
+    border-color: #cbd5e1;
+}
+
+/* ---------- Submit Button ---------- */
+.submit-btn {
+    display: block;
+    width: 100%;
+    margin-top: 1.75rem;
+    padding: 0.9rem;
+    background: linear-gradient(135deg, var(--accent), #a855f7);
+    color: #fff;
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 14px var(--accent-glow);
+    position: relative;
+    overflow: hidden;
+}
+
+.submit-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+    opacity: 0;
+    transition: opacity var(--transition);
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--accent-glow);
+}
+
+.submit-btn:hover::after {
+    opacity: 1;
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* ---------- Tooltip Wrapper ---------- */
+.tooltip-wrapper {
+    position: relative;
+}
+
+.has-tooltip {
+    cursor: help;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.tooltip-icon {
+    font-size: 0.85rem;
+    opacity: 0.7;
+    transition: opacity var(--transition);
+}
+
+.has-tooltip:hover .tooltip-icon {
+    opacity: 1;
+}
+
+/* ---------- BMI Calculator Popup ---------- */
+.bmi-calculator-popup {
+    display: none;
+    position: absolute;
+    top: -12rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    width: 280px;
+    background: var(--popup-bg);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    box-shadow: var(--popup-shadow);
+    z-index: 50;
+    opacity: 0;
+    animation: popupIn 0.25s ease forwards;
+}
+
+.bmi-calculator-popup.visible {
+    display: block;
+}
+
+@keyframes popupIn {
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.bmi-calculator-popup h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    color: var(--accent);
+}
+
+.popup-desc {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-bottom: 0.8rem;
+}
+
+.popup-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+}
+
+.popup-field label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: 0.2rem;
+    display: block;
+}
+
+.popup-field input {
+    width: 100%;
+    padding: 0.45rem 0.6rem;
+    font-size: 0.85rem;
+    font-family: inherit;
+    border: 1.5px solid var(--input-border);
+    border-radius: 8px;
+    outline: none;
+    transition: var(--transition);
+    background: var(--input-bg);
+    color: var(--text-primary);
+}
+
+.popup-field input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 2px var(--accent-glow);
+}
+
+.popup-result {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--accent);
+    margin: 0.8rem 0 0.6rem;
+    padding: 0.4rem;
+    background: var(--accent-glow);
+    border-radius: 8px;
+}
+
+.popup-btn {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.82rem;
+    font-family: inherit;
+    font-weight: 600;
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.popup-btn:hover {
+    background: var(--accent-hover);
+}
+
+/* ---------- DPF Tooltip ---------- */
+.dpf-tooltip {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 0.5rem);
+    left: 50%;
+    transform: translateX(-50%) translateY(8px);
+    width: 320px;
+    background: var(--popup-bg);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.3rem;
+    box-shadow: var(--popup-shadow);
+    z-index: 50;
+    opacity: 0;
+    animation: popupIn 0.25s ease forwards;
+}
+
+.dpf-tooltip.visible {
+    display: block;
+}
+
+.dpf-tooltip h4 {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+.dpf-tooltip p {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    margin-bottom: 0.5rem;
+}
+
+.dpf-tooltip p:last-child {
+    margin-bottom: 0;
+}
+
+/* ---------- Results Card ---------- */
+.results-card {
+    text-align: center;
+    animation: cardSlideIn 0.5s ease;
+}
+
+@keyframes cardSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.results-card.high-risk {
+    border-left: 4px solid var(--danger);
+}
+
+.results-card.low-risk {
+    border-left: 4px solid var(--success);
+}
+
+.result-header {
+    margin-bottom: 1.5rem;
+}
+
+.result-title {
+    font-size: 1.45rem;
+    font-weight: 800;
+}
+
+.high-risk .result-title {
+    color: var(--danger);
+}
+
+.low-risk .result-title {
+    color: var(--success);
+}
+
+/* ---------- Probability Bars ---------- */
+.prob-section {
+    text-align: left;
+}
+
+.prob-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.4rem;
+}
+
+.prob-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.prob-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.diabetic-dot {
+    background: var(--danger);
+}
+
+.non-diabetic-dot {
+    background: var(--success);
+}
+
+.prob-value {
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.diabetic-value {
+    color: var(--danger);
+}
+
+.non-diabetic-value {
+    color: var(--success);
+}
+
+.bar-track {
+    width: 100%;
+    height: 12px;
+    background: #f1f5f9;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    border-radius: 6px;
+    width: 0;
+    transition: width 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.diabetic-fill {
+    background: var(--bar-diabetic);
+}
+
+.non-diabetic-fill {
+    background: var(--bar-non-diabetic);
+}
+
+/* ---------- Footer ---------- */
+.footer {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+}
+
+/* ---------- Enhanced BMI Calculator ---------- */
+.bmi-form-group {
+    position: relative;
+}
+
+.bmi-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.bmi-input-wrapper input {
+    flex: 1;
+}
+
+.bmi-container {
+    position: relative;
+}
+
+.bmi-btn {
+    padding: 0.6rem 0.8rem;
+    background: linear-gradient(135deg, var(--accent), #a855f7);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1rem;
+    line-height: 1;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bmi-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(99, 102, 241, 0.3);
+}
+
+.bmi-popup {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 300px;
+    background: var(--popup-bg);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius);
+    padding: 1.2rem;
+    box-shadow: var(--popup-shadow);
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+    margin-top: 0.5rem;
+}
+
+.bmi-container:hover .bmi-popup {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.bmi-popup h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.bmi-mode-selector {
+    margin-bottom: 1rem;
+}
+
+.mode-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.mode-tab {
+    padding: 0.5rem;
+    background: var(--input-bg);
+    border: 1.5px solid var(--input-border);
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.mode-tab:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.mode-tab.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.bmi-field {
+    margin-bottom: 1rem;
+}
+
+.unit-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.unit-selector label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.unit-selector input[type="radio"] {
+    cursor: pointer;
+}
+
+.bmi-field label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 0.4rem;
+}
+
+.bmi-field input {
+    width: 100%;
+    padding: 0.5rem 0.6rem;
+    font-size: 0.9rem;
+    border: 1.5px solid var(--input-border);
+    border-radius: 6px;
+    outline: none;
+    transition: var(--transition);
+}
+
+.bmi-field input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.height-imperial {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.height-imperial label {
+    display: block;
+}
+
+.unit-info {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 0.4rem;
+    padding: 0.4rem;
+    background: rgba(99, 102, 241, 0.05);
+    border-radius: 4px;
+}
+
+.bmi-result {
+    text-align: center;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bmi-calc-result {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.result-value {
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent), #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.result-category {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 0.4rem;
+    background: rgba(99, 102, 241, 0.08);
+    border-radius: 4px;
+}
+
+.btn-use-bmi {
+    padding: 0.5rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 0.5rem;
+}
+
+.btn-use-bmi:hover {
+    background: var(--accent-hover);
+}
+
+.bmi-result .error {
+    color: var(--danger);
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.bmi-result .success {
+    color: var(--success);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+#bmi-calc {
+    width: 100%;
+    padding: 0.6rem;
+    background: linear-gradient(135deg, var(--accent), #a855f7);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 0.9rem;
+}
+
+#bmi-calc:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 1.6rem;
+    }
+
+    .card {
+        padding: 1.5rem 1.2rem;
+    }
+
+    .bmi-popup {
+        width: 240px;
+        right: auto;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .bmi-popup,
+    .dpf-tooltip {
+        width: 240px;
+    }
+
+    .bmi-input-wrapper {
+        gap: 0.4rem;
+    }
+
+    .bmi-btn {
+        padding: 0.5rem 0.6rem;
+        font-size: 0.9rem;
+        min-width: 40px;
+    }
+}
