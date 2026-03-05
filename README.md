@@ -35,3 +35,5 @@ Data Visualization : Matplotlib, Seaborn
 Algorithms: Logistic Regression, Random Forest
 Evaluation: Accuracy, Precision, Recall, F1-Score
 Model saved using pickle for deployment
+
+“⚠️ Note: While frontend code makes up more lines, the main logic and intellectual effort of the project is in Python/ML.”
