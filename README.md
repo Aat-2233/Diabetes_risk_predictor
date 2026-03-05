@@ -1,39 +1,29 @@
-Diabetes Risk Predictor
-🩺 Project Overview
-The Diabetes Risk Predictor is a machine learning-based web app that predicts the likelihood of a person developing diabetes using health parameters. This helps users assess their risk early and take preventive actions.
+Diabetes Risk Predictor 🩺
+Project Focus: Machine Learning & Python
+The Diabetes Risk Predictor predicts the likelihood of developing diabetes using health parameters from the Pima Indians Diabetes Dataset (CSV). The main focus of this project is the ML model and Python backend, while the frontend is a simple interface to input data and display predictions.
 
-⚙️ Features
-Predicts low, medium, or high risk of diabetes.
-Accepts user inputs like age, BMI, glucose, blood pressure, etc.
-Displays risk probability along with the category.
-Built as a Flask web application for easy access.
-Optional deployment for online access.
+⚠️ Note: While GitHub shows more lines of HTML/CSS/JS, the core logic and intellectual work is in Python/ML.
+
+🔹 Features
+Predicts Low / Medium / High diabetes risk.
+Inputs: Age, BMI, Glucose, Blood Pressure, Insulin, etc.
+Displays probability of diabetes.
+ML-focused: Python code for data preprocessing, training, and prediction.
+Frontend: Simple Flask web app to make the model interactive.
 
 🗂 Dataset
-Dataset: Pima Indians Diabetes Dataset (CSV)
+Pima Indians Diabetes Dataset (CSV)
 Source: Kaggle
-Features include:
-Pregnancies
-Glucose
-Blood Pressure
-Skin Thickness
-Insulin
-BMI
-Diabetes Pedigree Function
-Age
-Outcome (0 = No diabetes, 1 = Diabetes)
+Columns: Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age, Outcome
 
 🧪 Technology Stack
-
-Frontend: HTML, CSS, JavaScript
-Backend: Flask (Python)
-Machine Learning: scikit-learn, pandas, numpy
+Backend & ML: Python, scikit-learn, pandas, numpy
+Frontend: HTML, CSS, JavaScript (for user interface only)
 Model Storage: pickle
-Data Visualization : Matplotlib, Seaborn
+Visualization : Matplotlib, Seaborn
 
 🔧 Model
 Algorithms: Logistic Regression, Random Forest
 Evaluation: Accuracy, Precision, Recall, F1-Score
 Model saved using pickle for deployment
 
-“⚠️ Note: While frontend code makes up more lines, the main logic and intellectual effort of the project is in Python/ML.”
