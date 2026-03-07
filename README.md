@@ -16,6 +16,15 @@ Pima Indians Diabetes Dataset (CSV)
 Source: Kaggle
 Columns: Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age, Outcome
 
+### Diabetes Pedigree Function
+The Diabetes Pedigree Function (DPF) is a special feature included in the
+Pima Indians dataset. It summarizes the genetic risk of diabetes by
+combining information about relatives who have the condition and their
+closeness to the patient. The score is a floating‑point number
+(typically between 0.08 and 2.5) where higher values indicate stronger
+hereditary predisposition. In this application the value is taken as an
+input directly, matching the precomputed column in the original data.
+
 🧪 Technology Stack
 Backend & ML: Python, scikit-learn, pandas, numpy
 Frontend: HTML, CSS, JavaScript (for user interface only)

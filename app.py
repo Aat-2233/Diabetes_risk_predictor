@@ -20,11 +20,36 @@ app = Flask(__name__)
 
 
 # ===============================
+# Utility Functions
+# ===============================
+
+def get_dpf_definition():
+    """Return a human-friendly description of the Diabetes Pedigree Function.
+
+    The Diabetes Pedigree Function (DPF) is a numeric score derived from the
+    Pima Indians dataset that estimates the genetic influence of diabetes
+    based on the patient's family history. It combines information about
+    relatives who have diabetes with their degree of kinship to the patient.
+    Higher values indicate a greater hereditary risk. The score typically
+    ranges from about 0.08 up to around 2.5 in the original dataset.
+    """
+    return (
+        "The Diabetes Pedigree Function (DPF) is a measure of genetic "
+        "influence on diabetes based on family history. Higher values "
+        "indicate a stronger hereditary predisposition to diabetes. "
+        "The score is precomputed in the Pima Indians dataset and usually "
+        "falls between 0 and approximately 2.5."
+    )
+
+
+# ===============================
 # Home Page
 # ===============================
 @app.route("/")
 def home():
-    return render_template("index.html")
+    # pass the DPF description to the template so the front end can display
+    # a consistent definition if needed
+    return render_template("index.html", dpf_definition=get_dpf_definition())
 
 
 # ===============================
