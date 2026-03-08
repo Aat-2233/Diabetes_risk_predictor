@@ -9,9 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // -------- BMI Calculator Popup --------
     setupBMICalculator();
 
-    // -------- DPF Tooltip --------
-    setupDPFTooltip();
-
     // -------- Scroll to results if present --------
     const results = document.getElementById('results');
     if (results) {

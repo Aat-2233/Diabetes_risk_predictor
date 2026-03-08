@@ -90,23 +90,13 @@
                         </div>
                     </div>
 
-                    <!-- Diabetes Pedigree Function — with hover definition -->
-                    <div class="form-group tooltip-wrapper" id="dpf-group">
-                        <label for="dpf" class="has-tooltip">
+                    <!-- Diabetes Pedigree Function -->
+                    <div class="form-group">
+                        <label for="dpf">
                             Diabetes Pedigree Function
-                            <span class="tooltip-icon">ℹ️</span>
                         </label>
                         <input type="number" id="dpf" name="DiabetesPedigreeFunction" step="any" placeholder="e.g. 0.47" required>
-
-                        <!-- DPF Definition Tooltip -->
-                        <div class="dpf-tooltip" id="dpf-tooltip">
-                            <h4>What is Diabetes Pedigree Function?</h4>
-                            <p>{{ dpf_definition }}</p>
-                            <p>
-                                <strong>Range:</strong> Typically 0.08 – 2.42<br>
-                                <strong>Higher values</strong> indicate a stronger genetic predisposition to diabetes.
-                            </p>
-                        </div>
+                        <small class="field-help">The Diabetes Pedigree Function (DPF) is a measure of genetic influence on diabetes based on family history. Higher values indicate a stronger hereditary predisposition to diabetes. The score is precomputed in the Pima Indians dataset and usually ranges from 0.08 to 2.42.<br><strong>Range:</strong> 0.08 – 2.42</small>
                     </div>
 
                     <!-- Age -->

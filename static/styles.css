@@ -223,6 +223,20 @@ body {
     border-color: #cbd5e1;
 }
 
+.field-help {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    opacity: 0.8;
+    font-weight: 500;
+}
+
+.field-help strong {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
 /* ---------- Submit Button ---------- */
 .submit-btn {
     display: block;
